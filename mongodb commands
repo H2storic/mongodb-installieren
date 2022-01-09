@@ -1,0 +1,18 @@
+apt upgrade && apt update -y
+apt install gnupg
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add -
+echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/5.0 main" | tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+apt update 
+apt-get install -y mongodb-org
+
+# MongoDB config Datei öffnen. Hierbei die bindIP von 127.0.0.1 auf 0.0.0.0 stellen. | STR + X -> Y -> ENTER zum Speichern und verlassen der config.
+nano /etc/mongod.conf 
+
+# MongoDB neustarten
+service mongod restart
+
+# Nach erstellen eines Benutzers erneut die config öffnen. Hierbei das # bei SECURITY entfernen und darunter mit 2 Leertasten folgendes schreiben: "authorization: enabled"
+nano /etc/mongod.conf 
+
+# MongoDB neustarten
+service mongod restart
